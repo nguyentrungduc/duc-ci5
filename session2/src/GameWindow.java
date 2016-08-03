@@ -23,6 +23,7 @@ public class GameWindow extends Frame implements Runnable{
     Image planeImage2;
     Image bulletImage;
     Image enemyplaneImage;
+    Image enemyplaneImage2;
     int plane1width;
     int plane1height;
     int plane2width;
@@ -36,6 +37,7 @@ public class GameWindow extends Frame implements Runnable{
     Plane plane2;
     Vector<Bullet> bulletVector;
     Vector<EnemyPlane> enemyPlaneVector;
+    Vector<EnemyPlane> enemyPlaneVector2;
 
     public GameWindow() {
         System.out.println("GameWindow constructor");
@@ -46,6 +48,7 @@ public class GameWindow extends Frame implements Runnable{
         plane2 = new Plane(200,500);
         bulletVector = new Vector<Bullet>();
         enemyPlaneVector = new Vector<EnemyPlane>();
+        enemyPlaneVector2 = new Vector<EnemyPlane>();
         this.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -91,7 +94,7 @@ public class GameWindow extends Frame implements Runnable{
             planeImage2 = ImageIO.read(new File("resources/plane2.png"));
             bulletImage = ImageIO.read(new File("resources/bullet.png"));
             enemyplaneImage = ImageIO.read(new File("resources/enemy_plane_white_1.png"));
-            this.plane1height = planeImage1.getHeight(null);
+            enemyplaneImage2 = ImageIO.read(new File("resources/enemy_plane_yellow_1.png"));
             this.plane1width = planeImage1.getWidth(null);
             this.plane2height = planeImage2.getHeight(null);
             this.plane2width = planeImage2.getWidth(null);
@@ -201,6 +204,7 @@ public class GameWindow extends Frame implements Runnable{
     @Override
     public void run() {
         int t = 0;
+        int t1 = 0;
         while (true) {
             try {
                 t++;
@@ -211,6 +215,11 @@ public class GameWindow extends Frame implements Runnable{
                     EnemyPlane enemyplane = new EnemyPlane(n,0);
                     enemyPlaneVector.add(enemyplane);
                     t = 0;
+                }
+                if(t1 == 60){
+                    EnemyPlane enemyplane = new EnemyPlane(n,n/2);
+                    enemyPlaneVector.add(enemyplane);
+                    t1 = 0;
                 }
                 Iterator<EnemyPlane> enemyplaneIterator = enemyPlaneVector.iterator();
 
@@ -236,6 +245,7 @@ public class GameWindow extends Frame implements Runnable{
                             enemyplaneIterator.remove();
                         }
                     }
+
                 }
                 repaint();
             } catch (InterruptedException e) {
