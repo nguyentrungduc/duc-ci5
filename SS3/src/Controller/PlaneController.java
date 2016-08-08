@@ -13,12 +13,14 @@ import java.awt.event.KeyListener;
 /**
  * Created by DUC on 7/31/2016.
  */
-public class PlaneController extends SingleController implements KeyListener {
+public class PlaneController extends SingleController implements
+        KeyListener, Colliable {
     public static final int SPEED = 10;
     private ControlManager bulletManager;
     private PlaneController(Plane plane, GameDraw gameDraw){
         super(plane,gameDraw);
         this.bulletManager = new ControlManager();
+        CollsionPool.instance.add(this);
     }
 
 
@@ -83,4 +85,9 @@ public class PlaneController extends SingleController implements KeyListener {
             new Plane(250, 600),
             new ImageDraw("resources/plane3.png")
     );
+
+    @Override
+    public void onCollide(Colliable colliable) {
+
+    }
 }

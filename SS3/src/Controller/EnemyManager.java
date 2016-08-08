@@ -19,7 +19,7 @@ public class EnemyManager extends ControlManager {
      super();
     }
 
-    int t = 0;
+    private int t = 0;
     @Override
     public void run() {
         t++;
@@ -32,10 +32,9 @@ public class EnemyManager extends ControlManager {
                     new Enemy(enX, enY),
                     new ImageDraw("resources/plane1.png"));
             this.add(enemyController);
-            super.run();
         }
+        super.run();
     }
-
 
     public final static EnemyManager instance = new EnemyManager();
 

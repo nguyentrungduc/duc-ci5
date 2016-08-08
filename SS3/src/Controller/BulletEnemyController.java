@@ -10,7 +10,7 @@ public class BulletEnemyController extends SingleController implements Colliable
     private static final int SPEED = 20;
     public BulletEnemyController(GameObject gameObject, GameDraw gameDraw) {
         super(gameObject, gameDraw);
-        this.gameVector.dy =SPEED;
+        this.gameVector.dy = SPEED;
         CollsionPool.instance.add(this);
     }
 

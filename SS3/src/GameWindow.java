@@ -1,3 +1,4 @@
+import Controller.BulletEnemyManager;
 import Controller.CollsionPool;
 import Controller.EnemyManager;
 import Controller.PlaneController;
@@ -86,6 +87,7 @@ public class GameWindow extends Frame implements Runnable{
 
         PlaneController.planeController.draw(bufferImageGraphic);
         EnemyManager.instance.draw(bufferImageGraphic);
+        BulletEnemyManager.instance.draw(bufferImageGraphic);
 
         g.drawImage(bufferedImage, 0, 0, null);
 
@@ -95,10 +97,11 @@ public class GameWindow extends Frame implements Runnable{
     public void run() {
         while (true) {
             try {
-                Thread.sleep(17);
                 PlaneController.planeController.run();
                 EnemyManager.instance.run();
+                BulletEnemyManager.instance.run();
                 CollsionPool.instance.run();
+                Thread.sleep(17);
                 repaint();
             } catch (InterruptedException e) {
                 e.printStackTrace();
